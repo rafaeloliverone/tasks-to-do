@@ -34,6 +34,28 @@ function Tasks() {
         history.push('/');
     }
 
+    async function taskEdit(task) {
+        await setIdTaskEdit(task.id);
+        setTitle(task.title);
+        setEditing(true);
+    }
+
+    async function taskDelete(idTask) {
+        await api.delete(`/task-delete/${idTask}/`);
+
+    }
+
+    async function strikeUnstrike(task) {
+        task.completed = !task.completed;
+
+        const data = {
+            title: task.title,
+            completed: task.completed
+        }
+
+        await api.post(`task-update/${task.id}/`, data)
+        console.log('Task:', task.completed)
+    }
 
     useEffect(() => {
         api.get('task-list').then(response => {
@@ -57,9 +79,9 @@ function Tasks() {
                             </div>
 
                             <div style={{ flex: 1 }}>
-                                <button id="submit" onClick={handleNewTask} 
+                                <button id="submit" onClick={handleNewTask}
                                     className="btn btn-warning" type="submit">
-                                        Register
+                                    Register
                                 </button>
                             </div>
                         </div>
@@ -75,16 +97,16 @@ function Tasks() {
                             </div>
 
                             <div style={{ flex: 1 }}>
-                                <button id="submit" onClick={() => taskEdit(task)} 
+                                <button id="submit" onClick={() => taskEdit(task)}
                                     className="btn btn-sm btn-outline-info" type="submit">
-                                        Edit
+                                    Edit
                                 </button>
                             </div>
 
                             <div style={{ flex: 1 }}>
-                                <button onClick={() => taskDelete(task.id)} 
+                                <button onClick={() => taskDelete(task.id)}
                                     className="btn btn-sm btn-outline-dark delete" type="button">
-                                        Delete
+                                    Delete
                                 </button>
                             </div>
 
@@ -93,12 +115,9 @@ function Tasks() {
                     ))}
                 </div>
 
-
-
             </div>
 
         </div>
-
 
     );
 }
