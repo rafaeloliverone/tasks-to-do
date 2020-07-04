@@ -5,6 +5,10 @@
 
 A aplicação consiste em uma tela principal listando todas suas tarefas concluidas e não concluidas, para um melhor controle do que falta ser feito.
 	
+<h1 align="center">
+    <img alt="Starter" title="Javascript Starter"src="static/screen.png"  />
+</h1>
+	
 ## Execução 💻
 - Entrar na pasta backend, rodar o seguinte comando: 
  	- python3 manage.py runserver
